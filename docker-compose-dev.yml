@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  the_blik-postgres:
+    container_name: the_blik-postgres-server
+    image: postgres:13.4
+    networks:
+      - webnet
+    environment:
+      POSTGRES_PASSWORD: ${ORM_PASSWORD}
+      POSTGRES_USER: ${ORM_USERNAME}
+      POSTGRES_DB: ${ORM_DATABASE}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  postgres-client:
+    container_name: postgres-client-adminer
+    image: adminer
+    depends_on:
+      - the_blik-postgres
+    restart: always
+    networks:
+      - webnet
+    ports:
+      - 8080:8080
+
+networks:
+  webnet:
+volumes:
+  pgdata:

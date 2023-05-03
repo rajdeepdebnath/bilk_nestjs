@@ -1,0 +1,68 @@
+### Register Valid Brokerage User
+POST /localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "corpType": "Brokerage",
+  "companyName": "FoxTail Brokers",
+  "firstName": "Howard",
+  "lastName": "Fox",
+  "email": "howard_fox@foxtail.com",
+  "password": "password123",
+  "passwordConfirm": "password123"
+}
+
+### Register User With Duplicate companyName
+POST /localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "corpType": "Brokerage",
+  "companyName": "FoxTail Brokers",
+  "firstName": "Samantha",
+  "lastName": "Fox",
+  "email": "samantha_fox@foxtail.com",
+  "password": "password456",
+  "passwordConfirm": "password456"
+}
+
+### Register User With Invalid Password (companyName must be unique)
+POST /localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "corpType": "Brokerage",
+  "companyName": "FoxTail Brokers",
+  "firstName": "Howard",
+  "lastName": "Fox",
+  "email": "howard_fox@foxtail.com",
+  "password": "password12345",
+  "passwordConfirm": "password54321"
+}
+
+### Login Brokerage With Valid Credentials
+POST /localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "howard_fox@foxtail.com",
+  "password": "password123"
+}
+
+### Login With Invalid Email
+POST /localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "samantha_fox@foxtail.com",
+  "password": "password123"
+}
+
+### Login With Invalid Password
+POST /localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "samantha_fox@foxtail.com",
+  "password": "password123"
+}
